@@ -1,5 +1,6 @@
 import json
 import pandas
+import pickle
 
 # read in news tiers
 with open('src/news_tiers.json','r') as fp: 
@@ -37,3 +38,7 @@ quality_list = ["Top Tier News Sources", "Market Trends & Mixed Quality", "Local
 # filter dataframe for only quality sources
 dfq = df_ranked[df_ranked["rank"].isin(quality_list)]
 print("Shape for filtered dataframe by news tiers:", dfq.shape)
+
+# write to 
+output = open("news_filtered.pkl" , "wb")
+pickle.dump(dfq, output)
