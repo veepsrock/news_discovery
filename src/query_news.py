@@ -1,11 +1,15 @@
 import requests
 import pandas as pd
 import re
+import os
+
+# get newsapi key
+news_key = os.getenv("NEWS_API_KEY")
 
 # function to get news
 def fetch_articles(page, keywords, start_date, end_date):
     url = "https://newsapi.org/v2/everything"
-    api_key = "087ca3934d854fa8b14b24ef90bb7dbd"
+    api_key = news_key
     params = {
         "q" : keywords,
         "apiKey" : api_key, 
