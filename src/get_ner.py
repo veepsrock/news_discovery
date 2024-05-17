@@ -1,3 +1,16 @@
+import openai
+import os
+from openai import AzureOpenAI
+
+
+# connect to client
+client = AzureOpenAI(
+    api_key=os.getenv("AZURE_OPENAI_API_KEY_GPT4"),
+    api_version="2023-12-01-preview",
+    azure_endpoint= "https://rfaz-openai-gpt4.openai.azure.com"
+)
+
+
 SYSTEM_PROMPT = "You are a smart and intelligent Named Entity Recognition (NER) system. I will provide you the definition of the entities you need to extract, the sentence from where your extract the entities and the output format with examples."
 
 USER_PROMPT_1 = "Are you clear about your role?"
@@ -31,7 +44,7 @@ GUIDELINES_PROMPT = (
 final_prompt = GUIDELINES_PROMPT
 
 # function to get ner
-def get_ner(final_prompt, sentence):
+def get_ner_fx(final_prompt, sentence):
     final_prompt += f"\n\n3. Sentence: {sentence}\nOutput: "
     response = client.chat.completions.create(
         model="RFAZ-OpenAI-DataScience-ChatGPT4-32k", # This must match the custom deployment name you chose for your model.
