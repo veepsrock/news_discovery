@@ -18,7 +18,7 @@ importlib.reload(get_ner)
 from get_ner import *
 
 # read in data
-df = pd.read_csv("news_classified.csv")
+df = pd.read_csv("news_classified_2021_2024.csv")
 df["sentiment"].value_counts()
 
 # filter data for category of interest

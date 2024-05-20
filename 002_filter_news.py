@@ -8,7 +8,7 @@ with open('src/news_tiers.json','r') as fp:
 
 
 # read in data
-df = pd.read_csv("opioids_reduce_prevention_2024-01-01_2024-05-16_.csv")
+df = pd.read_csv("/mnt/code/opioids_reduce_prevention_2021-01-01_2024-05-16_.csv")
 print("Shape for original dataframe:", df.shape)
 
 # map news sources to tiers
@@ -40,5 +40,5 @@ dfq = df_ranked[df_ranked["rank"].isin(quality_list)]
 print("Shape for filtered dataframe by news tiers:", dfq.shape)
 
 # write to 
-output = open("news_filtered.pkl" , "wb")
+output = open("news_filtered_2021_2024.pkl" , "wb")
 pickle.dump(dfq, output)

@@ -21,7 +21,7 @@ from query_news import *
 # get initial pull of results
 page = 1
 keywords = "opioids reduce prevention"
-start_date = '2024-01-01'
+start_date = '2021-01-01'
 end_date = '2024-05-16'
 response = fetch_articles(page, keywords, start_date, end_date )
 articles = response.json()["articles"] 
@@ -48,6 +48,7 @@ df.drop("source", axis = 1, inplace = True)
 # remove removed files
 df = df[df["description"]!="[Removed]"]
 df.drop_duplicates(subset=['author', 'title', 'url'], keep='first', inplace = True)
+print(df.shape)
 
 # write to csv
 file_name = "_".join(keywords.split())
