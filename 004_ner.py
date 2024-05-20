@@ -22,10 +22,12 @@ df = pd.read_csv("news_classified_2021_2024.csv")
 df["sentiment"].value_counts()
 
 # filter data for category of interest
-test = df[df["sentiment"] == "public policy and legislation"]
+#test = df[df["sentiment"] == "public policy and legislation"]
 
 # get NER results
-results = test['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
+test_df = df.head(5)
+results = test_df['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
 # write to CSV
-results.to_csv("ner_results.csv", index = False)
+results.to_csv("ner_results_2021_2024.csv", index = False)
+
