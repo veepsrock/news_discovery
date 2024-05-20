@@ -21,7 +21,8 @@ from zero_shot import *
 
 
 # read in data
-df = pickle.load(open("news_filtered.pkl", "rb"))
+df = pickle.load(open("news_filtered_2021_2024.pkl", "rb"))
+df.shape
 
 # make sure description column is reading as string
 df['description'] = df['description'].astype(str)
@@ -44,12 +45,9 @@ else:
     results_list.append(predict_sentiment(df=df, text_column ="description", text_labels= text_labels))
 
 # conctenate results into final dataframe
-results_df = pd.concat(resulst_list, ignore_index = True)  
+results_df = pd.concat(results_list, ignore_index = True)  
+
+results_df.head()
 
 # write to csv
-results_df.to_csv("news_classified.csv", index = False)
-
-
-
-
-results_df = predict_sentiment(df=df, text_column ="description", text_labels= text_labels)
+results_df.to_csv("news_classified_2021_2024.csv", index = False)
