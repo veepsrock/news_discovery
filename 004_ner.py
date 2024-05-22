@@ -18,15 +18,24 @@ importlib.reload(get_ner)
 from get_ner import *
 
 # read in data
-df = pd.read_csv("news_classified_2021_2024.csv")
+df = pd.read_csv("news_classified_2021_2024_3.csv")
 df["sentiment"].value_counts()
 df["content"] = df["content"].astype(str)
-df.shape
+
 
 # filter data for category of interest
 #test = df[df["sentiment"] == "public policy and legislation"]
-batch_6 = df.iloc[200:253, ]
-batch_6.shape
+filter_list = ["safe injection sites", "needle exchange programs", "medication-assisted treatment", "opioid replacement", "prevention", "rehabilitation and recovery", "nalaxone", "funding opportunity", "decriminalization", "public policy and legislation"] 
+# filter dataframe for only solutions and policy
+dfq = df[df["sentiment"].isin(filter_list)]
+
+dfq.columns
+dfq["publishedAt"].dtype
+
+
+dfq["year"] = dfq['publishedAt'].str[0:4]
+
+dfq["year"].value_counts()
 # get NER results
 results = batch_6['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
@@ -34,3 +43,14 @@ results = batch_6['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 results.to_csv("ner_results_2021_2024_6.csv", index = False)
 
 results
+
+
+# for one result
+funding = df[df["sentiment"] == "funding opportunity"]
+
+result = get_ner_fx(final_prompt,funding["content"][74] )
+
+result
+
+funding.head(1)
+funding.columns
