@@ -28,29 +28,14 @@ df["content"] = df["content"].astype(str)
 filter_list = ["safe injection sites", "needle exchange programs", "medication-assisted treatment", "opioid replacement", "prevention", "rehabilitation and recovery", "nalaxone", "funding opportunity", "decriminalization", "public policy and legislation"] 
 # filter dataframe for only solutions and policy
 dfq = df[df["sentiment"].isin(filter_list)]
-
-dfq.columns
-dfq["publishedAt"].dtype
-
-
 dfq["year"] = dfq['publishedAt'].str[0:4]
-
-dfq["year"].value_counts()
+dfq.to_csv("news_filtered_categories.csv", index = False)
+dfq.shape
 # get NER results
-results = batch_6['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
+batch_1 = dfq.iloc[0:50, ]
+results = batch_1['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
 # write to CSV
-results.to_csv("ner_results_2021_2024_6.csv", index = False)
-
-results
+results.to_csv("ner_results_2021_2024_q_1.csv", index = False)
 
 
-# for one result
-funding = df[df["sentiment"] == "funding opportunity"]
-
-result = get_ner_fx(final_prompt,funding["content"][74] )
-
-result
-
-funding.head(1)
-funding.columns
