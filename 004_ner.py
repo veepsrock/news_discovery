@@ -32,10 +32,10 @@ dfq["year"] = dfq['publishedAt'].str[0:4]
 dfq.to_csv("news_filtered_categories.csv", index = False)
 dfq.shape
 # get NER results
-batch_1 = dfq.iloc[0:50, ]
-results = batch_1['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
+batch_2 = dfq.iloc[50:100, ]
+results = batch_2['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
 # write to CSV
-results.to_csv("ner_results_2021_2024_q_1.csv", index = False)
+results.to_csv("ner_results_2021_2024_q_2.csv", index = False)
 
 
