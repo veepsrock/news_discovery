@@ -6,9 +6,7 @@ from transformers import pipeline
 classifier = pipeline("zero-shot-classification", model="MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli")
 import os
 import sys
-import importlib
-import zero_shot
-importlib.reload(zero_shot)
+import json
 
 # load functions
 with open('project_config.json','r') as fp: 
@@ -17,6 +15,10 @@ with open('project_config.json','r') as fp:
 module_path = os.path.join(project_config['project_module_relative_path'])
 sys.path.append(module_path)
  
+import importlib
+import zero_shot
+importlib.reload(zero_shot)
+
 from zero_shot import *
 
 
@@ -29,8 +31,7 @@ df['description'] = df['description'].astype(str)
 
 
 # list of labels 
-text_labels=["prevention", "opioid replacement", "decriminalization", "lawsuit and settlement", "medical malpractice", "misuse of pain medication", "overdose",  "community impact and support", "stigma and mental health", "pharameutical industry", "rehabilitation and recovery", "public policy and legislation", "addiction crisis", "international drug trade", "nalaxone", "drug trafficking",  "safe injection sites", "needle exchange programs", "medication-assisted treatment"]
-
+text_labels=["prevention", "opioid replacement", "decriminalization", "lawsuit and settlement", "medical malpractice", "misuse of pain medication", "overdose",  "drug use disorder", "compassion fatigue", "stigma", "pharameutical industry", "rehabilitation and recovery", "public policy and legislation", "addiction crisis", "international drug trade", "nalaxone", "drug trafficking",  "safe injection sites", "needle exchange programs", "medication-assisted treatment", "funding opportunity", "overdose reversal"]
 
 # run prediction on df
 results_list = []
@@ -50,4 +51,4 @@ results_df = pd.concat(results_list, ignore_index = True)
 results_df.head()
 
 # write to csv
-results_df.to_csv("news_classified_2021_2024.csv", index = False)
+results_df.to_csv("news_classified_2021_2024_2.csv", index = False)
