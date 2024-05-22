@@ -20,14 +20,17 @@ from get_ner import *
 # read in data
 df = pd.read_csv("news_classified_2021_2024.csv")
 df["sentiment"].value_counts()
+df["content"] = df["content"].astype(str)
+df.shape
 
 # filter data for category of interest
 #test = df[df["sentiment"] == "public policy and legislation"]
-
+batch_6 = df.iloc[200:253, ]
+batch_6.shape
 # get NER results
-test_df = df.head(5)
-results = test_df['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
+results = batch_6['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
 # write to CSV
-results.to_csv("ner_results_2021_2024.csv", index = False)
+results.to_csv("ner_results_2021_2024_6.csv", index = False)
 
+results

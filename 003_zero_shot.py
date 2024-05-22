@@ -31,8 +31,7 @@ df['description'] = df['description'].astype(str)
 
 
 # list of labels 
-text_labels=["prevention", "opioid replacement", "decriminalization", "lawsuit and settlement", "medical malpractice", "misuse of pain medication", "overdose",  "drug use disorder", "compassion fatigue", "stigma", "pharameutical industry", "rehabilitation and recovery", "public policy and legislation", "addiction crisis", "international drug trade", "nalaxone", "drug trafficking",  "safe injection sites", "needle exchange programs", "medication-assisted treatment", "funding opportunity", "overdose reversal"]
-
+text_labels = ["medical malpractice", "lawsuit and settlement", "drug trafficking", "decriminalization", "public policy and legislation", "drug use disorder", "stigma", "addiction crisis", "overdose", "safe injection sites", "needle exchange programs", "medication-assisted treatment", "opioid replacement", "prevention", "rehabilitation and recovery", "nalaxone", "funding opportunity"] 
 # run prediction on df
 results_list = []
 if len(df) > 25:
@@ -47,7 +46,7 @@ else:
 
 # conctenate results into final dataframe
 results_df = pd.concat(results_list, ignore_index = True)  
-
+results_df.shape
 results_df.head()
 
 # write to csv
