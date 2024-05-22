@@ -31,7 +31,7 @@ df['description'] = df['description'].astype(str)
 
 
 # list of labels 
-text_labels = ["medical malpractice", "lawsuit and settlement", "drug trafficking", "decriminalization", "public policy and legislation", "drug use disorder", "stigma", "addiction crisis", "overdose", "safe injection sites", "needle exchange programs", "medication-assisted treatment", "opioid replacement", "prevention", "rehabilitation and recovery", "nalaxone", "funding opportunity"] 
+text_labels = ["medical malpractice", "lawsuit and settlement", "drug trafficking", "decriminalization", "public policy and legislation", "drug use disorder", "stigma", "addiction crisis", "overdose", "safe injection sites", "needle exchange programs", "medication-assisted treatment", "opioid replacement", "prevention", "rehabilitation and recovery", "nalaxone", "funding opportunity", "pharameutical industry"] 
 # run prediction on df
 results_list = []
 if len(df) > 25:
@@ -50,4 +50,4 @@ results_df.shape
 results_df.head()
 
 # write to csv
-results_df.to_csv("news_classified_2021_2024_2.csv", index = False)
+results_df.to_csv("news_classified_2021_2024_3.csv", index = False)
