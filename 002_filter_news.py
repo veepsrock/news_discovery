@@ -1,5 +1,5 @@
 import json
-import pandas
+import pandas as pd
 import pickle
 
 # read in news tiers
@@ -8,7 +8,7 @@ with open('src/news_tiers.json','r') as fp:
 
 
 # read in data
-df = pd.read_csv("/mnt/code/opioids_reduce_prevention_2021-01-01_2024-05-16_.csv")
+df = pd.read_csv("/mnt/code/brazil_Rio_de_Janeiro_climate_AI_2022-05-22_2024-05-22_.csv")
 print("Shape for original dataframe:", df.shape)
 
 # map news sources to tiers
@@ -33,12 +33,13 @@ df_ranked = pd.merge(df, news_ranked,how = "left", on = "source_name")
 
 
 # select types of news that we want
-quality_list = ["Top Tier News Sources", "Market Trends & Mixed Quality", "Local News Sources", "High-Quality News Sources", "Medical & Mixed Quality", "Scientific & High Quality", "Reliable Specialized Sources", "Legal & Mixed Quality"]
+quality_list = ["Top Tier News Sources", "Market Trends & Mixed Quality", "Local News Sources", "High-Quality News Sources", "Medical & Mixed Quality", "Scientific & High Quality", "Reliable Specialized Sources", "Legal & Mixed Quality", "Tech Specialized Sources"]
 
 # filter dataframe for only quality sources
 dfq = df_ranked[df_ranked["rank"].isin(quality_list)]
 print("Shape for filtered dataframe by news tiers:", dfq.shape)
 
 # write to 
-output = open("news_filtered_2021_2024.pkl" , "wb")
+output = open("brazil_news_filtered_2022_2024.pkl" , "wb")
+dfq.to_csv("brazil_news_filtered_2022_2024.csv", index = False)
 pickle.dump(dfq, output)

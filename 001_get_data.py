@@ -5,8 +5,7 @@ import json
 import os
 import sys
 import importlib
-import query_news
-importlib.reload(query_news)
+
 
 # load functions
 with open('project_config.json','r') as fp: 
@@ -15,14 +14,16 @@ with open('project_config.json','r') as fp:
 module_path = os.path.join(project_config['project_module_relative_path'])
 sys.path.append(module_path)
  
+import query_news
+importlib.reload(query_news)
 from query_news import *
 
 
 # get initial pull of results
 page = 1
-keywords = "opioids reduce prevention"
-start_date = '2021-01-01'
-end_date = '2024-05-16'
+keywords = "brazil Rio de Janeiro climate AI"
+start_date = '2022-05-22'
+end_date = '2024-05-22'
 response = fetch_articles(page, keywords, start_date, end_date )
 articles = response.json()["articles"] 
 print("Total Results:", response.json()["totalResults"])

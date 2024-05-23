@@ -18,7 +18,7 @@ importlib.reload(get_ner)
 from get_ner import *
 
 # read in data
-df = pd.read_csv("news_classified_2021_2024_3.csv")
+df = pd.read_csv("brazil_news_filtered_2022_2024.csv")
 df["sentiment"].value_counts()
 df["content"] = df["content"].astype(str)
 
@@ -32,10 +32,12 @@ dfq["year"] = dfq['publishedAt'].str[0:4]
 dfq.to_csv("news_filtered_categories.csv", index = False)
 dfq.shape
 # get NER results
-batch_2 = dfq.iloc[50:100, ]
-results = batch_2['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
+
+results = dfq['content'].apply(lambda x: {x: get_ner_fx(final_prompt, x)})
 
 # write to CSV
-results.to_csv("ner_results_2021_2024_q_2.csv", index = False)
+results.to_csv("brazil_ner_results_2021_2024_q_2.csv", index = False)
 
+result = get_ner_fx(final_prompt, dfq["content"][6])
 
+result
